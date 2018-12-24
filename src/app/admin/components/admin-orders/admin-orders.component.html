@@ -1,0 +1,33 @@
+
+<div  *ngIf="orders$ | async as orders">
+  <table class="table table-striped" [mfData]="orders" #mf="mfDataTable" [mfRowsOnPage]="5" mfSortBy="title">
+    <thead>
+    <tr>
+      <th style="width: 50%">
+        <mfDefaultSorter by="shipping.name">Customer</mfDefaultSorter>
+      </th>
+      <th style="width: 40%">
+        <mfDefaultSorter by="datePlaced">Date</mfDefaultSorter>
+      </th>
+      <th style="width: 10%">
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of mf.data">
+      <td>{{item.shipping.name}}</td>
+      <td>{{item.datePlaced | date}}</td>
+      <td>
+        <a href="#" >View</a>
+      </td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="4">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
+</div>

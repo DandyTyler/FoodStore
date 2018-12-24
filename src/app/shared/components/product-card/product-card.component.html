@@ -1,0 +1,32 @@
+<div *ngIf="product.title" class="card" style="width: 20rem;">
+  <img *ngIf="product.imageUrl" [src]="product.imageUrl" class="card-img-top" alt="{{product.title}}">
+  <div class="card-body">
+    <h4 class="card-title">{{product.title}}</h4>
+    <p class="card-text">{{product.price | currency: 'USD':true}}</p>
+  </div>
+  <div *ngIf="showActions && shoppingCart" class="card-footer">
+    <button
+      *ngIf="shoppingCart.getQuantity(product)===0; else updateQuantity"
+      (click)="addToCart()"
+      class="btn btn-secondary btn-block">Add to Cart
+    </button>
+    <ng-template #updateQuantity>
+      <app-product-quantity [product]="product" [shopping-cart]="shoppingCart">
+      </app-product-quantity>
+    </ng-template>
+  </div>
+</div>
+
+<!--<div  *ngIf="product.payload.val().title" class="card" style="width: 20rem;">-->
+<!--<img *ngIf="product.payload.val().imageUrl" [src]="product.payload.val().imageUrl" class="card-img-top" alt="{{product.payload.val().title}}">-->
+<!--<div class="card-body">-->
+<!--<h4 class="card-title">{{product.payload.val().title}}</h4>-->
+<!--{{product.key}}-->
+<!--<p class="card-text">{{product.payload.val().price | currency: 'USD':true}}</p>-->
+<!--</div>-->
+<!--<div class="card-footer">-->
+<!--<button *ngIf = "showActions"-->
+<!--(click)="addToCart(product.payload.val())"-->
+<!--class="btn btn-primary btn-block">Add to Cart</button>-->
+<!--</div>-->
+<!--</div>-->
